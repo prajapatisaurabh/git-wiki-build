@@ -1,18 +1,24 @@
 {
   "name": "git-wiki-build",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple Express server for git-wiki-build",
   "license": "ISC",
-  "author": "",
+  "author": "saurabhprajapati",
   "type": "module",
-  "main": "index.js",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prajapatisaurabh/git-wiki-build.git"
+  },
   "scripts": {
+    "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "dotenv": "^17.4.2",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "inngest": "^4.20.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
