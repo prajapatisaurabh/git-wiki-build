@@ -1,13 +1,14 @@
+import "dotenv/config";
 import express from "express";
-import dotenv from "dotenv";
 import { inngest, functions } from "./inngest/index.js";
 import { serve } from "inngest/express";
-
-dotenv.config();
+import routes from "./routes/index.routes.js";
 
 const app = express();
 app.use(express.json());
 app.use("/api/inngest", serve({ client: inngest, functions }));
+
+app.use("/api/index", routes);
 
 app.get("/", (req, res) => {
     res.send("Hello World!");
