@@ -53,6 +53,21 @@ export async function getRepoFiles(owner, repo, path = "") {
 }
 
 
+export async function getFileContent(owner, repo, path) {
+    const response = await octokit.repos.getContent({ owner, repo, path });
+
+    if (Array.isArray(response.data) || response.data.type !== "file") {
+        throw new Error(`Path "${path}" is not a file`);
+    }
+
+    if (response.data.encoding !== "base64") {
+        throw new Error(`Unexpected encoding "${response.data.encoding}" for file "${path}"`);
+    }
+
+    return Buffer.from(response.data.content, "base64").toString("utf-8");
+}
+
+
 export function parseRepo(input) {
     const clean = input
         .replace("https://github.com/", "")
