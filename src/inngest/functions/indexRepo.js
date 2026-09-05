@@ -14,14 +14,12 @@ export const indexRepo = inngest.createFunction(
             return await getRepoFiles(owner, repo);
         });
 
-        const documents = await step.run("Chunk Files", async () => {
-            return await chunkFiles(owner, repo, files);
-        });
-
-        await step.run("Upsert to Pinecone", async () => {
+        const chunkCount = await step.run("Chunk And Store", async () => {
+            const documents = await chunkFiles(owner, repo, files);
             await storeDocuments(documents);
+            return documents.length;
         });
 
-        return { repokey, fileCount: files.length, chunkCount: documents.length };
+        return { repokey, fileCount: files.length, chunkCount };
     }
 );
