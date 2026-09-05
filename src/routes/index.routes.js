@@ -4,7 +4,7 @@ import { parseRepo } from "../service/github.js";
 
 const routes = Router();
 
-routes.post("/index-repo", async (req, res) => {
+routes.post("/", async (req, res) => {
     const { repoUrl } = req.body;
     const githubAccessToken = process.env.GITHUB_TOKEN;
 
