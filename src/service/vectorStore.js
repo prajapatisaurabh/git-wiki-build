@@ -17,6 +17,7 @@ function getEmbeddings() {
         embeddings = new OpenAIEmbeddings({
             apiKey: process.env.OPENAI_API_KEY,
             model: "text-embedding-3-small",
+            batchSize: 100,
         });
     }
     return embeddings;
